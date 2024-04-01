@@ -1,0 +1,12 @@
+body {
+    background-image: url('/frontend/img/123.avif');
+    /* Set background image size to cover the entire body */
+    background-size: cover;
+    /* Center the background image horizontally and vertically */
+    background-position: center center;
+    /* Set background image to fixed so it doesn't scroll with content */
+    background-attachment: fixed;
+    /* Add a background color as fallback */
+    /* Specify text color */
+    color: white;
+}

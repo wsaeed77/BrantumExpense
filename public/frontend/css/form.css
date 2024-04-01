@@ -1,0 +1,67 @@
+.body {
+    background-image: url('/frontend/img/123.avif');
+    /* Set background image size to cover the entire body */
+    background-size: cover;
+    /* Center the background image horizontally and vertically */
+    background-position: center center;
+    /* Set background image to fixed so it doesn't scroll with content */
+    background-attachment: fixed;
+    /* Add a background color as fallback */
+    /* Specify text color */
+    color: white;
+}
+.form-control::placeholder {
+    color: white; /* Specify the color you want */
+}
+.span-1{
+    color: #ff7127 !important;
+}
+.headings-1{
+    margin-bottom: 10px !important;
+}
+
+.form-group label {
+    color: #000000 !important;
+    margin-top: 15px !important;
+    font-size: 20px !important;
+    font-weight: 600 !important;
+}
+
+
+.form-control {
+    background-color:#ff7127 !important;
+    border-color: black !important;
+    color: white !important;
+    font-size: larger !important;
+}
+
+.form-control::placeholder {
+    color: rgb(255, 255, 255) !important;
+}
+
+.btn-primary {
+    background-color: #ff7127 !important;
+    border-color: #ff7127 !important;
+    margin-top: 21px !important;
+}
+
+.btn-primary:hover {
+    background-color: #ff7127 !important;
+    border-color: #ff7127 !important;
+
+}
+
+.footer {
+    color: #ff7127 !important;
+    text-align: center !important;
+    padding: 20px 0 !important;
+    background-color: black !important;
+}
+.btn-primary{
+    color: #000000 !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+}
+.row-1{
+    margin-left: 200px !important;
+}
