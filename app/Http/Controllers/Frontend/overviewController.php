@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Team;
+use App\Models\formfill;
 use Illuminate\Http\Request;
 
-class formController extends Controller
+class overviewController extends Controller
 {
+
     public function dashboard()
     {
-        $teams = Team::pluck('name', 'id');
-        return view('frontend.form', compact('teams'));
+        return view('frontend.overview');
     }
-
 }
