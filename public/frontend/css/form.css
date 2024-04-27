@@ -1,5 +1,5 @@
 .body {
-    background-image: url('/frontend/img/123.avif');
+    background-image: url('../../frontend/img/123.jpg');
     /* Set background image size to cover the entire body */
     background-size: cover;
     /* Center the background image horizontally and vertically */

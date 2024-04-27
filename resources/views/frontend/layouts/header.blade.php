@@ -25,10 +25,12 @@
             <div id="sidebar-wrapper">
                 <ul class="sidebar-nav">
                     <img  class="logo1" src="{{url('frontend/img/brantum_tech_logo.jpeg')}}" alt="">
-                    <li class="sidebar-brand">
 
+
+                    <li class="sidebar-brand">
+                    @if(auth()->check())
                     <li>
-                        <a href="{{ url('/') }}">Dashboard</a>
+                        <a href="{{ url('/dashboard') }}">Dashboard</a>
                     </li>
                     <li>
                         <a href="{{ url('/form') }}">Form</a>
@@ -36,18 +38,15 @@
                     <li>
                         <a href="{{ url('/overview') }}">Overview</a>
                     </li>
-                    <!-- <li>
-                        <a href="#">Events</a>
-                    </li>
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li> -->
-                    <li>
+                        <li>
                         <a href="#">Contact</a>
                     </li>
+
+                    <li>
+                        <a href="{{url('/logout')}}">Logout</a>
+                    </li>
                 </ul>
+                @endif
             </div>
+
             <!-- /#sidebar-wrapper -->
