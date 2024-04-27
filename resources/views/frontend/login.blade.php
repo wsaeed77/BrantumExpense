@@ -239,28 +239,41 @@
     <form action="{{route('loged.in')}}" method="POST" class="form login">
         @csrf
 
-        <div class="form__field">
+        <div class="form__field" style="margin-right: 20px; margin-top: 300px;" >
             <label for="login__username"><svg class="icon">
                     <use xlink:href="#icon-user"></use>
                 </svg><span class="hidden">Username</span></label>
             <input type="text" id="username" placeholder="username" name="username" required>
         </div>
-        <div class="form__field">
+        <div class="form__field" style="margin-right: 20px">
             <label for="login__password"><svg class="icon">
                     <use xlink:href="#icon-lock"></use>
                 </svg><span class="hidden">Password</span></label>
             <input type="password" id="password"  placeholder="password" name="password" required>
         </div>
-        @error('username')
-        <span class="text-red-500">{{ $message }}</span>
-        @enderror
 
-        <div class="form__field">
+        @if ($errors->any())
+            <div class="text-red-500" style="color: red;">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <div class="form__field" style="margin-right: 20px">
             <input type="submit" value="Sign In">
         </div>
 
     </form>
+    <div style="margin-top: 20px; text-align: center;margin-right: 20px;">
+        Don't have an account? <a href="{{ route('sign.up') }}" style="color: blue;">Sign Up Now</a>
+    </div>
 </div>
+
+
+
 
 <svg xmlns="http://www.w3.org/2000/svg" class="icons">
     <symbol id="icon-arrow-right" viewBox="0 0 1792 1792">

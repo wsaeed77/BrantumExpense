@@ -15,15 +15,16 @@ class dashboardController extends Controller
 
         $teams = Team::all();
 
-        // Fetch total expenses for each team using DB query
-        $teamExpenses = DB::table('expenses')
-            ->select('team_id', DB::raw('SUM(price) as total_expense'))
-            ->groupBy('team_id')
-            ->get();
+        $teamExpenses = Team::with('expenses')
+            ->withSum('expenses', 'price')
+            ->get(['id', 'name']);
 
-        // Merge total expenses with teams data
+
+//        dd($teamExpenses);
+
         $teamsWithExpenses = $teams->map(function ($team) use ($teamExpenses) {
-            $team->total_expense = $teamExpenses->where('team_id', $team->id)->first()->total_expense ?? 0;
+            $teamExpense = $teamExpenses->firstWhere('id', $team->id);
+            $team->expenses_sum_price = $teamExpense ? $teamExpense->expenses_sum_price : 0;
             return $team;
         });
 

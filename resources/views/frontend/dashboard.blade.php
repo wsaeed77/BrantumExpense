@@ -40,9 +40,11 @@
                                 </thead>
                                 <tbody>
                                 @foreach($teamsWithExpenses as $team)
+
                                     <tr>
                                         <td><a href="{{ route('team.details', $team->id) }}">{{ucwords( $team->name) }}</a></td>
-                                        <td>{{ $team->total_expense }}</td>
+
+                                        <td>{{ $team->expenses_sum_price}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

@@ -44,11 +44,8 @@ class expenseController extends Controller
     {
         $entries = expense::all();
 
-        $years = $entries->pluck('created_at')->map(function ($item) {
-            return $item->format('Y');
-        })->unique()->values()->toArray();
 
-        return view('frontend.overview', compact('entries','years',));
+        return view('frontend.overview', compact('entries'));
     }
 
     public function edit($id)

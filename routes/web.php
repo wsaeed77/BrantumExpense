@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FormfillController;
+use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\dashboardController;
@@ -26,6 +27,8 @@ Route::get('/',[\App\Http\Controllers\AuthController::class, 'Show_Login'])->mid
 
 Route::post('/', [\App\Http\Controllers\AuthController::class, 'login'])->name('loged.in');
 
+Route::get('/signup' ,[\App\Http\Controllers\SignUpController::class,'showSignUpForm'])->name('sign.up');
+Route::post('/sign-up', [SignUpController::class, 'signUp'])->name('sign.UP');
 
 Route::get('/dashboard', [dashboardController::class ,'dashboard'])->middleware('auth')->name("dashboard");
 

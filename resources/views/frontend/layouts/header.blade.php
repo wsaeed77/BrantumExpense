@@ -26,9 +26,9 @@
                 <ul class="sidebar-nav">
                     <img  class="logo1" src="{{url('frontend/img/brantum_tech_logo.jpeg')}}" alt="">
 
-                  @if(auth()->check())
-                    <li class="sidebar-brand">
 
+                    <li class="sidebar-brand">
+                    @if(auth()->check())
                     <li>
                         <a href="{{ url('/dashboard') }}">Dashboard</a>
                     </li>
@@ -46,6 +46,7 @@
                         <a href="{{url('/logout')}}">Logout</a>
                     </li>
                 </ul>
+                @endif
             </div>
-            @endif
+
             <!-- /#sidebar-wrapper -->
