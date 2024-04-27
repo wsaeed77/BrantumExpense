@@ -36,15 +36,19 @@ Route::get('overview', [expenseController::class, 'overview'])->middleware('auth
 
 Route::post('/submit-form', [expenseController::class, 'store'])->middleware('auth')->name('formfill.submit');
 
-Route::delete('/delete-entry/{id}', 'App\Http\Controllers\expenseController@destroy')->name('entry.destroy');
+Route::delete('/delete-entry/{id}', 'App\Http\Controllers\expenseController@destroy')->middleware('auth','usertype')->name('entry.destroy');
 
-Route::get('/edit-entry/{id}', 'App\Http\Controllers\expenseController@edit')->middleware('auth')->name('entry.edit');
+Route::get('/edit-entry/{id}', 'App\Http\Controllers\expenseController@edit')->middleware('auth','usertype')->name('entry.edit');
 
-Route::post('/update-entry/{id}', 'App\Http\Controllers\expenseController@update')->middleware('auth')->name('entry.update');
+Route::post('/update-entry/{id}', 'App\Http\Controllers\expenseController@update')->middleware('auth','usertype')->name('entry.update');
 
 
 Route::get('/team/{name}', [TeamController::class, 'showDetails'])->middleware('auth')->name('team.details');
 
 Route::get('/logout', [AuthController::class ,'logout'])->name('logout');
+
+Route::get('/fetch-entries', [expenseController::class, 'fetchEntries'])->name('fetch.entries');
+
+
 
 

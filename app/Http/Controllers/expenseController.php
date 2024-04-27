@@ -43,7 +43,12 @@ class expenseController extends Controller
     public function overview()
     {
         $entries = expense::all();
-                return view('frontend.overview', compact('entries'));
+
+        $years = $entries->pluck('created_at')->map(function ($item) {
+            return $item->format('Y');
+        })->unique()->values()->toArray();
+
+        return view('frontend.overview', compact('entries','years',));
     }
 
     public function edit($id)
@@ -74,4 +79,45 @@ class expenseController extends Controller
 
         return redirect()->route('overview.expenditure');
     }
+
+    public function fetchEntries(Request $request)
+    {
+
+        $year = $request->input('year');
+        $month = $request->input('month');
+
+
+        $entries = expense::whereYear('created_at', $year)
+            ->whereMonth('created_at', $month)
+            ->get();
+
+
+
+        $usertype = null;
+        if(Auth::check()){
+
+            $usertype = auth()->user()->user_type;
+            $output = [
+                'entries' => [],
+                'userType' => $usertype,
+            ];
+
+            foreach ($entries as $entry) {
+                $output['entries'][] = [
+
+                    'name' => ucwords($entry->team->name),
+                    'type' => $entry->type,
+                    'price' => $entry->price,
+                    'description' => $entry->description,
+                    'created_at' => $entry->created_at,
+                    'created_by' => ucwords($entry->user->name),
+                    'edit' => route('entry.edit', $entry->id),
+                    'delete' => route('entry.destroy', $entry->id),
+                       'id' => $entry->id,
+                ];
+            }
+
+            return response()->json($output);
+    }
+}
 }
