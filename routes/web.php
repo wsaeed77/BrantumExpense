@@ -27,6 +27,7 @@ Route::get('/',[\App\Http\Controllers\AuthController::class, 'Show_Login'])->mid
 
 Route::post('/', [\App\Http\Controllers\AuthController::class, 'login'])->name('loged.in');
 
+
 Route::get('/signup' ,[\App\Http\Controllers\SignUpController::class,'showSignUpForm'])->middleware('login')->name('sign.up');
 
 Route::post('/sign-up', [SignUpController::class, 'signUp'])->name('sign.UP');
