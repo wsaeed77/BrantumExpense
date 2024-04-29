@@ -30,7 +30,7 @@
                 <div class="container mt-5">
                     <div class="row justify-content-center">
                         <div class="col-md-8">
-                            <h2 class="mb-4 text-dark form-heading"><span class="span-1">OWNERS</span> EXPENNSE</h2>
+                            <h2 class="mb-4 text-dark form-heading"><span class="span-1">OWNERS</span> EXPENSE</h2>
                             <table class="table">
                                 <thead>
                                 <tr>
