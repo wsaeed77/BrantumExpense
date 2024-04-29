@@ -49,6 +49,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            <h5>The total expense of company in month {{date('F')}} is <b>{{$total}}</b></h5>
                         </div>
                     </div>
                 </div>

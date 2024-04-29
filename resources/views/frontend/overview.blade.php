@@ -14,7 +14,7 @@
     </head>
 
 
-    <button id="fetch-entries-btn" class="btn btn-primary">Fetch Entries</button>
+
     <div class="mb-3">
         <label for="year-select" class="form-label">Select Year:</label>
         <select class="form-select" id="year-select">
@@ -42,6 +42,7 @@
             <option value="12">December</option>
         </select>
     </div>
+    <button id="fetch-entries-btn" class="btn btn-primary">Fetch Entries</button>
 
     <div id="page-content-wrapper">
         <div class="container mt-5">
@@ -75,15 +76,18 @@
                                     <form action="{{ route('entry.edit', $entry->id) }}" method="GET" style="">
                                         @csrf
                                         <button type="submit" class="btn btn-dark delete-btn"
-                                        >Edit</button>
+                                        >Edit
+                                        </button>
                                     </form>
                                 </td>
                                 <td>
                                     <form action="{{ route('entry.destroy', $entry->id) }}" method="POST" style="">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger delete-btn" onclick="return confirm('Are you sure you want to delete this entry?')"
-                                        >Delete</button>
+                                        <button type="submit" class="btn btn-danger delete-btn"
+                                                onclick="return confirm('Are you sure you want to delete this entry?')"
+                                        >Delete
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
@@ -95,29 +99,29 @@
         </div>
     </div>
 
-<script>
-         $(document).ready(function() {
+    <script>
+        $(document).ready(function () {
             var dataTable = $('.table').DataTable({
                 columns: [
-                    { data: 'name' },
-                    { data: 'type' },
-                    { data: 'price' },
-                    { data: 'description' },
-                    { data: 'created_at' },
-                    { data: 'created_by' },
-                    {data : 'edit'},
-                    {data : 'delete'},
-            ],
+                    {data: 'name'},
+                    {data: 'type'},
+                    {data: 'price'},
+                    {data: 'description'},
+                    {data: 'created_at'},
+                    {data: 'created_by'},
+                    {data: 'edit'},
+                    {data: 'delete'},
+                ],
             });
 
             function fetchEntries(month, year) {
                 $.ajax({
                     url: '{{ route("fetch.entries") }}',
                     type: 'GET',
-                    data: { month: month, year: year },
-                    success: function(data) {
+                    data: {month: month, year: year},
+                    success: function (data) {
                         console.log('Received data:', data);
-                        data.entries.forEach(function(entry) {
+                        data.entries.forEach(function (entry) {
                             entry.edit = '<a href="' + entry.edit + '" class="btn btn-dark delete-btn">Edit</a>';
                             entry.delete = '<button class="btn btn-danger delete-entry-btn" data-id="' + entry.id + '">Delete</button>';
 
@@ -126,45 +130,46 @@
 
                         dataTable.clear().rows.add(data.entries).draw();
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         console.error('Error:', error);
                     }
                 });
             }
 
-            $('#fetch-entries-btn').click(function() {
+            $('#fetch-entries-btn').click(function () {
                 var selectedMonth = $('#month-select').val();
                 var selectedYear = $('#year-select').val();
                 fetchEntries(selectedMonth, selectedYear);
             });
-             $('.table').on('click', '.delete-entry-btn', function() {
-                 var entryId = $(this).data('id');
-                 if (confirm('Are you sure you want to delete this entry?')) {
-                     deleteEntry(entryId);
-                 }
-             });
-             function deleteEntry(entryId) {
+            $('.table').on('click', '.delete-entry-btn', function () {
+                var entryId = $(this).data('id');
+                if (confirm('Are you sure you want to delete this entry?')) {
+                    deleteEntry(entryId);
+                }
+            });
 
-                 $.ajax({
-                     url:' /delete-entry/' + entryId,
-                     type: 'DELETE',
-                     data: { _token: '{{ csrf_token() }}' },
-                     success: function(response) {
-                         $('#entry_' + entryId).remove();
-                         window.location.href = '{{ route("overview.expenditure") }}';
-                     },
-                     error: function(xhr, status, error) {
-                         if (xhr.status === 405) {
-                             $('#entry_' + entryId).remove();
-                             window.location.href = '{{ route("overview.expenditure") }}';
+            function deleteEntry(entryId) {
 
-                         } else {
-                             console.error('Error deleting entry:', error);
-                         }
-                     }
-                 });
-             }
+                $.ajax({
+                    url: ' /delete-entry/' + entryId,
+                    type: 'DELETE',
+                    data: {_token: '{{ csrf_token() }}'},
+                    success: function (response) {
+                        $('#entry_' + entryId).remove();
+                        window.location.href = '{{ route("overview.expenditure") }}';
+                    },
+                    error: function (xhr, status, error) {
+                        if (xhr.status === 405) {
+                            $('#entry_' + entryId).remove();
+                            window.location.href = '{{ route("overview.expenditure") }}';
+
+                        } else {
+                            console.error('Error deleting entry:', error);
+                        }
+                    }
+                });
+            }
         });
-</script>
+    </script>
 
 @endsection
