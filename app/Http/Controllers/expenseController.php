@@ -29,12 +29,12 @@ class expenseController extends Controller
 
 
         $expense = new expense();
-        $expense->user_id=Auth::id();
+        $expense->user_id = Auth::id();
         $expense->team_id = $request->input('name');
-             $expense->type = $request->input('type');
+        $expense->type = $request->input('type');
         $expense->price = $validatedData['price'];
         $expense->description = $validatedData['description'];
-        $expense->created_by=Auth::id();
+        $expense->created_by = Auth::id();
         $expense->save();
 
         return redirect()->back()->with('success', 'Values added successfully!');
@@ -53,7 +53,7 @@ class expenseController extends Controller
         $entry = expense::findOrFail($id);
         $team = Team::all();
 
-        return view('frontend.edit', compact('entry','team'));
+        return view('frontend.edit', compact('entry', 'team'));
     }
 
     public function update(Request $request, $id)
@@ -63,7 +63,7 @@ class expenseController extends Controller
         $entry->update($request->all());
 
         $entry->update(['created_by' => auth()->id()]);
-        $entry->update(['user_id'=>auth()->id()]);
+        $entry->update(['user_id' => auth()->id()]);
 
 
         return redirect()->route('overview.expenditure',);
@@ -89,9 +89,8 @@ class expenseController extends Controller
             ->get();
 
 
-
         $usertype = null;
-        if(Auth::check()){
+        if (Auth::check()) {
 
             $usertype = auth()->user()->user_type;
             $output = [
@@ -111,11 +110,11 @@ class expenseController extends Controller
                     'created_by' => ucwords($entry->user->name),
                     'edit' => route('entry.edit', $entry->id),
                     'delete' => route('entry.destroy', $entry->id),
-                       'id' => $entry->id,
+                    'id' => $entry->id,
                 ];
             }
 
             return response()->json($output);
+        }
     }
-}
 }

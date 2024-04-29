@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Carbon\PHPStan\AbstractMacro;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,4 +31,19 @@ class expense extends Model
 
 
         }
+
+
+    public static function getCurrentMonthExpenses()
+    {
+        $currentMonth = date('Y-m');
+
+        return self::whereYear('created_at', '=', date('Y'))
+            ->whereMonth('created_at', '=', date('m'))
+            ->get();
+    }
+
+
+
+
+
 }

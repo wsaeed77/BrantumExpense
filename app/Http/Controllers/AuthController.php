@@ -36,14 +36,5 @@ class AuthController extends Controller
         return redirect('/');
     }
 
-
-    public function signup(Request $request){
-
-
-        echo "hi there";
-
-
-
-    }
 }
 

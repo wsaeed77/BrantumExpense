@@ -20,7 +20,7 @@ class dashboardController extends Controller
             ->get(['id', 'name']);
 
 
-//        dd($teamExpenses);
+
 
         $teamsWithExpenses = $teams->map(function ($team) use ($teamExpenses) {
             $teamExpense = $teamExpenses->firstWhere('id', $team->id);
@@ -28,7 +28,16 @@ class dashboardController extends Controller
             return $team;
         });
 
-        return view('frontend.dashboard', compact('teamsWithExpenses'));
+        $currentMonthExpenses = Expense::getCurrentMonthExpenses();
+
+
+        $total = 0;
+        foreach ($currentMonthExpenses as $expense) {
+            $total += $expense->price;
+        }
+
+
+        return view('frontend.dashboard', compact('teamsWithExpenses','total'));
     }
 
 }
