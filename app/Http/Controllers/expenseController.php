@@ -99,6 +99,7 @@ class expenseController extends Controller
                 'userType' => $usertype,
             ];
 
+
             foreach ($entries as $entry) {
                 $output['entries'][] = [
 
@@ -106,7 +107,7 @@ class expenseController extends Controller
                     'type' => $entry->type,
                     'price' => $entry->price,
                     'description' => $entry->description,
-                    'created_at' => $entry->created_at,
+                    'created_at' => date('d-m-y', strtotime($entry->created_at)),
                     'created_by' => ucwords($entry->user->name),
                     'edit' => route('entry.edit', $entry->id),
                     'delete' => route('entry.destroy', $entry->id),
