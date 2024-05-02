@@ -54,6 +54,18 @@ Route::get('/logout', [AuthController::class ,'logout'])->name('logout');
 
 Route::get('/fetch-entries', [expenseController::class, 'fetchEntries'])->name('fetch.entries');
 
+Route::get('/userapproval',[AuthController::class,'userApproval'])->middleware('auth','usertype')->name('user.approval');
+
+Route::post('/approve/{id}',[AuthController::class, 'approve'])->middleware('auth')->name('submit.approval');
+
+
+Route::get('/fixedexpense', [\App\Http\Controllers\fixedexpenseController::class,'show'])->middleware('auth')->name('fixed.expense');
+
+Route::post('/fixedform',[\App\Http\Controllers\fixedexpenseController::class,'save'])->middleware('auth')->name('fixed.save');
+
+Route::post('/payfix/{id}',[\App\Http\Controllers\fixedexpenseController::class, 'update'])->middleware('auth')->name('fixed.pay');;
+
+
 
 
 

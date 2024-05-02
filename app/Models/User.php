@@ -23,6 +23,7 @@ class User extends Authenticatable
         'user_type',
         'email',
         'password',
+        'is_approved'
     ];
 
     /**
@@ -47,6 +48,12 @@ class User extends Authenticatable
     public function expenses()
     {
         return $this->hasMany(Expense::class);
+    }
+
+    public function expensetypes(){
+
+        return $this->hasMany(expensetype::class);
+
     }
 
 

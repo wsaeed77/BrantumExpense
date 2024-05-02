@@ -20,8 +20,6 @@ class dashboardController extends Controller
             ->get(['id', 'name']);
 
 
-
-
         $teamsWithExpenses = $teams->map(function ($team) use ($teamExpenses) {
             $teamExpense = $teamExpenses->firstWhere('id', $team->id);
             $team->expenses_sum_price = $teamExpense ? $teamExpense->expenses_sum_price : 0;
