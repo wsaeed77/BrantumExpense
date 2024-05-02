@@ -21,13 +21,13 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="dropdown2" class="headings-1">Type</label>
-                                <select class="form-control" id="dropdown2" name="type">
-                                    <option value="Bill" {{ $entry->type == 'Bill' ? 'selected' : '' }}>Bill</option>
-                                    <option value="Rent" {{ $entry->type == 'Rent' ? 'selected' : '' }}>Rent</option>
-                                    <option value="Utilities" {{ $entry->type == 'Utilities' ? 'selected' : '' }}>Utilities</option>
-                                    <option value="Food" {{ $entry->type == 'Food' ? 'selected' : '' }}>Food</option>
-                                    <option value="Others" {{ $entry->type == 'Others' ? 'selected' : '' }}>Others</option>
+                                <select class="form-control" id="dropdown2" name="type_id">
+                                    @foreach($type as $type)
+                                        <option value="{{$type->id}}" {{$entry->type_id==$type->id  ? 'selected' :' '}}>
+                                        {{$type->name}}
+                                    @endforeach
                                 </select>
+                                </div>
                         <div class="form-group">
                             <label for="price">Price</label>
                             <input type="number" class="form-control" id="price" name="price" value="{{ $entry->price }}">

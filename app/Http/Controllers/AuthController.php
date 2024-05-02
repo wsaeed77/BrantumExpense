@@ -20,10 +20,16 @@ class AuthController extends Controller
         $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
-        }
 
+            $user = Auth::user();
+            if ($user->is_approved) {
+                $request->session()->regenerate();
+                return redirect()->intended('/dashboard');
+            } else {
+                Auth::logout();
+                return back()->withErrors(['username' => 'Your account is not approved.']);
+            }
+        }
         return back()->withErrors(['username' => 'Invalid credentials']);
     }
 
@@ -35,6 +41,27 @@ class AuthController extends Controller
 
         return redirect('/');
     }
+
+    public function userApproval(){
+
+        $unapprovedUsers = User::all()->where('is_approved', 0);
+          return view('frontend.userapproval',compact('unapprovedUsers'));
+
+    }
+
+    public function approve(Request $request, $id){
+
+
+
+       $user = User::findOrFail($id) ;
+       $user->update(['is_approved'=> 1]) ;
+
+         $user->save();
+
+       return redirect()->route('user.approval');
+
+    }
+
 
 }
 

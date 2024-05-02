@@ -33,18 +33,18 @@
                         <a href="{{ url('/dashboard') }}">Dashboard</a>
                     </li>
                     <li>
-                        <a href="{{ url('/form') }}">Form</a>
+                        <a href="{{ url('/form') }}">Add Expense</a>
                     </li>
                     <li>
                         <a href="{{ url('/overview') }}">Overview</a>
                     </li>
-                        <li>
-                        <a href="#">Contact</a>
-                    </li>
-
                     <li>
                         <a href="{{url('/logout')}}">Logout</a>
                     </li>
+                        <li>
+                         <a href="{{url('/userapproval')}}">UserApproval</a>
+
+                        </li>
                 </ul>
                 @endif
             </div>

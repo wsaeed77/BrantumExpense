@@ -33,7 +33,7 @@
                         <tbody>
                         @foreach($teamExpenses as $expense)
                             <tr>
-                                <td>{{ $expense->type }}</td>
+                                <td>{{ $expense->type->name }}</td>
                                 <td>{{ $expense->price }}</td>
                                 <td>{{ $expense->description }}</td>
                                 <td>{{$expense->created_at}}</td>

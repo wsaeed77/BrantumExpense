@@ -2,8 +2,6 @@
 
 @section('main-container')
 
-
-
     <div id="page-content-wrapper">
         <div class="container mt-5">
             <div class="row row-1">
@@ -18,19 +16,19 @@
                                     <option value="{{ $id }}">{{ ucwords($name) }}</option>
                                 @endforeach
                             </select>
+                        </div>
                         <div class="form-group">
-                            <label for="dropdown2" class="headings-1">Type</label>
+                            <label for="dropdown2" class="headings-2">Type</label>
                             <select class="form-control" id="dropdown2" name="type">
-                                <option value="Bill">Bill</option>
-                                <option value="Rent">Rent</option>
-                                <option value="Utilities">Utilities</option>
-                                <option value="Food">Food</option>
-                                <option value="Others">Others</option>
+                                @foreach($expensestype as $id => $name)
+                                    <option value="{{ $id }}">{{ ucwords($name) }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="price" class="headings-1">Price</label>
-                            <input type="number" class="form-control @error('price') is-invalid @enderror" id="price" name="price" placeholder="Price">
+                            <input type="number" class="form-control @error('price') is-invalid @enderror" id="price"
+                                   name="price" placeholder="Price">
                             @error('price')
                             <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
@@ -39,7 +37,8 @@
                         </div>
                         <div class="form-group">
                             <label for="message" class="headings-1">Description</label>
-                            <textarea class="form-control @error('description') is-invalid @enderror" id="message" name="description" rows="3" placeholder="Enter your message"></textarea>
+                            <textarea class="form-control @error('description') is-invalid @enderror" id="message"
+                                      name="description" rows="3" placeholder="Enter your message"></textarea>
                             @error('description')
                             <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
@@ -52,6 +51,5 @@
             </div>
         </div>
     </div>
-
 
 @endsection

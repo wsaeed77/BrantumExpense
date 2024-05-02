@@ -18,6 +18,7 @@
     <div class="mb-3">
         <label for="year-select" class="form-label">Select Year:</label>
         <select class="form-select" id="year-select">
+            <option value="2026">2026</option>
             <option value="2025">2025</option>
             <option value="2024">2024</option>
             <option value="2023">2023</option>
@@ -65,9 +66,10 @@
                         </thead>
                         <tbody>
                         @foreach($entries as $entry)
+
                             <tr>
-                                <td>{{ $entry->team->name }}</td>
-                                <td>{{ $entry->type }}</td>
+                                <td>{{ ucwords($entry->team->name) }}</td>
+                                <td>{{ucwords($entry->type->name)  }}</td>
                                 <td>{{ $entry->price }}</td>
                                 <td>{{ $entry->description }}</td>
                                 <td>{{$entry->created_at}}</td>
