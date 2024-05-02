@@ -5,6 +5,7 @@
     <div id="page-content-wrapper">
         <div class="container mt-5">
             <div class="row row-1">
+
                 <div class="col-md-6">
                     <h2 class="mb-4 text-dark form-heading"><span class="span-1">DAILY</span> EXPENDITURE</h2>
                     <form method="POST" action="{{ route('formfill.submit') }}">
@@ -45,6 +46,11 @@
     </span>
                             @enderror
                         </div>
+                        @if($errors->any())
+                            <div class="alert alert-danger">
+                                {{ $errors->first('message') }}
+                            </div>
+                        @endif
                         <button type="submit" class="btn btn-primary submit">Submit</button>
                     </form>
                 </div>

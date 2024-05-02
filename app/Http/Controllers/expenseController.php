@@ -7,6 +7,7 @@ use App\Models\expensetype;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use function Laravel\Prompts\alert;
 
 class expenseController extends Controller
 {
@@ -27,6 +28,18 @@ class expenseController extends Controller
         ];
 
         $validatedData = $request->validate($rules, $messages);
+
+        $existingEntry = Expense::where([
+            ['type_id', $request->input('type')],
+            ['created_at', '>=', now()->startOfMonth()],
+            ['created_at', '<=', now()->endOfMonth()],
+        ])->whereHas('type', function ($query) {
+            $query->where('is_monthly', 1);
+        })->first();
+        if ($existingEntry) {
+            return redirect()->back()->withErrors(['message' => 'An entry already exists for this month.']);
+
+        }
 
 
         $expense = new expense();

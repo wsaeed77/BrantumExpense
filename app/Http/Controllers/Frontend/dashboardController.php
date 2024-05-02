@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\expensetype;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use App\Models\expense;
@@ -33,6 +34,12 @@ class dashboardController extends Controller
         foreach ($currentMonthExpenses as $expense) {
             $total += $expense->price;
         }
+
+        $monthlyExpenses = Expense::whereHas('type', function ($query) {
+            $query->where('is_monthly', 1);
+        })->get();
+
+//        dd($monthlyExpenses);
 
 
         return view('frontend.dashboard', compact('teamsWithExpenses','total'));
