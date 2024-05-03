@@ -57,11 +57,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($type as $type)
                                     <tr>
-                                        <td>hi</td>
+                                        <td>({{ucwords($type->name)}}</td>
 
                                         <td>hello</td>
                                     </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                             <h5>The total expense of company in month {{date('F')}} is <b>{{$total}}</b></h5>
