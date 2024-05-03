@@ -39,8 +39,9 @@
                             </tr>
                         @endforeach
                         </tbody>
-                    </table>
-                    <h5>The total expense of company in month {{date('F')}} is <b>{{$total}}</b></h5>
+                    </table><br>
+                    <h5>The total expense of company in month {{date('F')}} is <b>{{$total}}</b></h5><br>
+                    <h5>The company owes the manager <b>{{$managertotal}}</b> Rupees only</h5>
                 </div>
             </div>
         </div>
@@ -56,6 +57,7 @@
                             <th>Name</th>
                             <th>Status</th>
                             <th>Price</th>
+                            <th>Paid by</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -84,6 +86,18 @@
                                     @endforeach
                                     @if(!$foundExpense)
                                         0
+                                    @endif
+                                </td>
+                                <td>
+                                    @php $foundExpense = false; @endphp
+                                    @foreach($monthlyExpenses as $expense)
+                                        @if($expense->type_id == $type->id)
+                                            {{ucwords($expense->team->name)}}
+                                            @php $foundExpense = true; break; @endphp
+                                        @endif
+                                    @endforeach
+                                    @if(!$foundExpense)
+                                        -
                                     @endif
                                 </td>
                             </tr>

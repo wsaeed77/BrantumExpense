@@ -35,21 +35,31 @@ class dashboardController extends Controller
         foreach ($currentMonthExpenses as $expense) {
             $total += $expense->price;
         }
+        //FIXED EXPENSES DISPLAY
 
         $currentMonth = Carbon::now()->month;
-
-        $type = expensetype::all()->where('is_monthly',1);
-
+        $type = expensetype::all()->where('is_monthly', 1);
 
         $monthlyExpenses = Expense::whereHas('type', function ($query) {
             $query->where('is_monthly', 1);
         })->whereMonth('created_at', '=', $currentMonth)
             ->get();
 
+        $sohailTeamId = 'sohail';
+        $mang = Team::with(['expenses' => function ($query) use ($currentMonth) {
+            $query->whereMonth('created_at', '=', $currentMonth);
+        }])
+            ->withSum('expenses', 'price')
+            ->where('name', $sohailTeamId)
+            ->get();
 
+        $managertotal = null;
+        foreach ($mang as $manager) {
 
+            $managertotal += $manager->expenses_sum_price;
+        }
 
-        return view('frontend.dashboard', compact('teamsWithExpenses','total','type','monthlyExpenses'));
+        return view('frontend.dashboard', compact('teamsWithExpenses', 'total', 'type', 'monthlyExpenses', 'managertotal'));
     }
 
 }
