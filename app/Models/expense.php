@@ -15,7 +15,7 @@ class expense extends Model
         'user_id',
         'created_by',
         'team_id',
-        'type',
+        'type_id',
         'price',
         'description',
     ];
@@ -28,10 +28,11 @@ class expense extends Model
         public function team(){
 
         return$this->belongsTo(Team::class);
+    }
 
-
-        }
-
+    public function type(){
+        return $this->belongsTo(expensetype::class);
+    }
 
     public static function getCurrentMonthExpenses()
     {

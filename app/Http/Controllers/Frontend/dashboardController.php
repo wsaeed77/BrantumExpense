@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\expensetype;
 use App\Models\Team;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\expense;
 use Illuminate\Support\Facades\DB;
@@ -20,8 +22,6 @@ class dashboardController extends Controller
             ->get(['id', 'name']);
 
 
-
-
         $teamsWithExpenses = $teams->map(function ($team) use ($teamExpenses) {
             $teamExpense = $teamExpenses->firstWhere('id', $team->id);
             $team->expenses_sum_price = $teamExpense ? $teamExpense->expenses_sum_price : 0;
@@ -36,8 +36,20 @@ class dashboardController extends Controller
             $total += $expense->price;
         }
 
+        $currentMonth = Carbon::now()->month;
 
-        return view('frontend.dashboard', compact('teamsWithExpenses','total'));
+        $type = expensetype::all()->where('is_monthly',1);
+
+
+        $monthlyExpenses = Expense::whereHas('type', function ($query) {
+            $query->where('is_monthly', 1);
+        })->whereMonth('created_at', '=', $currentMonth)
+            ->get();
+
+
+
+
+        return view('frontend.dashboard', compact('teamsWithExpenses','total','type','monthlyExpenses'));
     }
 
 }

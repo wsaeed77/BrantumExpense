@@ -1,18 +1,10 @@
 @extends('frontend.layouts.main')
 
 @section('main-container')
-            <!-- Page Content -->
-
-
-
-
             <div id="page-content-wrapper">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-
-
-
                             <h1 style="margin-left: 50px">Welcome {{ auth()->user()->name }} To Brantum Technologies</h1>
                             <h4 style="margin-left: 50px">User Type =  {{auth()->user()->user_type}}</h4>
                             <p style="margin-left: 50px">Agency to Inspire
@@ -25,7 +17,6 @@
                     </div>
                 </div>
             </div>
-            <!-- /#page-content-wrapper -->
             <div id="page-content-wrapper">
                 <div class="container mt-5">
                     <div class="row justify-content-center">
@@ -40,7 +31,6 @@
                                 </thead>
                                 <tbody>
                                 @foreach($teamsWithExpenses as $team)
-
                                     <tr>
                                         <td><a href="{{ route('team.details', $team->id) }}">{{ucwords( $team->name) }}</a></td>
 
@@ -54,8 +44,33 @@
                     </div>
                 </div>
             </div>
-            <!-- /#wrapper -->
-        <!-- Menu Toggle Script -->
+            <div id="page-content-wrapper">
+                <div class="container mt-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <h2 class="mb-4 text-dark form-heading"><span class="span-1">Fix</span>EXPENSE</h2>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($type as $type)
+                                    <tr>
+                                        <td>({{ucwords($type->name)}}</td>
+
+                                        <td>hello</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                            <h5>The total expense of company in month {{date('F')}} is <b>{{$total}}</b></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <script>
         $("#menu-toggle").click(function(e) {
             e.preventDefault();
