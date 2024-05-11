@@ -13,8 +13,8 @@
         <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     </head>
 
-
-
+    <div id="page-content-wrapper">
+<div class="container mt-5">
     <div class="mb-3">
         <label for="year-select" class="form-label">Select Year:</label>
         <select class="form-select" id="year-select">
@@ -44,6 +44,8 @@
         </select>
     </div>
     <button id="fetch-entries-btn" class="btn btn-primary">Fetch Entries</button>
+</div>
+    </div>
 
     <div id="page-content-wrapper">
         <div class="container mt-5">
