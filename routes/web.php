@@ -58,12 +58,10 @@ Route::get('/userapproval',[AuthController::class,'userApproval'])->middleware('
 
 Route::post('/approve/{id}',[AuthController::class, 'approve'])->middleware('auth')->name('submit.approval');
 
+Route::delete('/delete-user/{id}',[AuthController::class,'deleteUser'])->middleware('auth')->name('user.delete');
 
-Route::get('/fixedexpense', [\App\Http\Controllers\fixedexpenseController::class,'show'])->middleware('auth')->name('fixed.expense');
 
-Route::post('/fixedform',[\App\Http\Controllers\fixedexpenseController::class,'save'])->middleware('auth')->name('fixed.save');
 
-Route::post('/payfix/{id}',[\App\Http\Controllers\fixedexpenseController::class, 'update'])->middleware('auth')->name('fixed.pay');;
 
 
 

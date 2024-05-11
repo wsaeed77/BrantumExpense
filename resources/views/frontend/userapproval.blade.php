@@ -16,7 +16,8 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>User Type</th>
-                            <th>Approve<th>
+                            <th>Actions<th>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -32,6 +33,13 @@
                                         <button type="submit" class="btn btn-dark delete-btn"
                                         >Approve
                                         </button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="{{ route('user.delete', $user->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger delete-btn">Delete</button>
                                     </form>
                                 </td>
                             </tr>

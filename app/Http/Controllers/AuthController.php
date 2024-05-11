@@ -62,6 +62,16 @@ class AuthController extends Controller
 
     }
 
+    public function deleteUser($id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            $user->delete();
+            return redirect()->route('user.approval');
+        }
+        return response()->json(['error' => 'User not found'], 404);
+    }
+
 
 }
 
